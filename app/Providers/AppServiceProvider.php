@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // set the config for log-viewer on every boot so Opcodes\LogViewer reads the folders dynamically
         $filePaths = Cache::get('log_viewer_file_paths', []);
-        Log::info('filePaths', $filePaths);
         app('config')->set('log-viewer.include_files', $filePaths);
+        app('config')->set('log-viewer.back_to_system_url', url('/'));
     }
 }
