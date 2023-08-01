@@ -1,7 +1,7 @@
 # Desktop Logger App
 
 ## Description
-Basically a NativePHP wrapper around Opcodes Log Viewer. 
+Basically a [NativePHP](https://github.com/NativePHP/laravel) wrapper around [Opcodes Log Viewer](https://github.com/opcodesio/log-viewer). 
 It's a simple app that allows you to view the log files for all your local laravel projects without installing any dependencies in them.
 
 ## Development Installation
@@ -14,4 +14,11 @@ It's a simple app that allows you to view the log files for all your local larav
 7. Run `php artisan native:serve`
 
 
+![](public/images/preview.png)
+![](public/images/preview2.png)
 
+## Usage
+
+- Select a folder with Laravel logs
+- Click show to view logs for that project
+- View logs
