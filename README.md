@@ -3,6 +3,7 @@
 ## Description
 Basically a [NativePHP](https://github.com/NativePHP/laravel) wrapper around [Opcodes Log Viewer](https://github.com/opcodesio/log-viewer). 
 It's a simple app that allows you to view the log files for all your local laravel projects without installing any dependencies in them.
+The frontend is built using Vue and TailwindCSS.
 
 ## Development Installation
 1. Clone the repo
