@@ -13,7 +13,7 @@
                                     <p class="mt-1 text-sm leading-6 text-gray-600">Add a project to view logs.</p>
 
                                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                        <div class="sm:col-span-4">
+                                        <div class="sm:col-span-6">
                                             <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                                             <div class="mt-2">
                                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -21,16 +21,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="sm:col-span-4">
+                                        <div class="sm:col-span-6">
                                             <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Path</label>
                                             <div class="mt-2">
                                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                                    <input @change.prevent="getPath"
-                                                           type="file"
-                                                           webkitdirectory
-                                                           directory
+                                                    <input :value="path" disabled placeholder="/storage/logs"
                                                            class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                           placeholder="/storage/logs">
+                                                    >
+                                                    <button @click.prevent="openFileDialog" v-if="!path">Choose Folder</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -39,8 +37,10 @@
                             </div>
 
                             <div class="mt-6 flex items-center justify-end gap-x-6">
-                                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                                <button type="button" class="text-sm font-semibold leading-6 text-gray-900" @click="close">Cancel</button>
+                                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    @click.prevent="addProject"
+                                >Save</button>
                             </div>
                         </form>
 
@@ -59,24 +59,49 @@ const name = ref('')
 const path = ref('')
 const getPath = (e) => {
     path.value = e.target.files[0]
-    console.log(
-        e,
-        URL.createObjectURL(e.target.files[0])
-    )
+   this
 
 }
 
-const emit = defineEmits(['addProject'])
+const emit = defineEmits(['addProject', 'close'])
 const addProject = () => {
     axios.post('/api/project', {
-        name: name,
-        path: path
+        name: name.value,
+        path: path.value
     }).then(response => {
         console.log(response.data)
         emit('addProject', response.data)
     }).catch(error => {
         console.log(error)
     })
+}
+
+const openFileDialog = async () => {
+    axios('/api/dashboard/get-path').then(response => {
+        console.log(response.data)
+        path.value = response.data
+    }).catch(error => {
+        console.log(error)
+    })
+    // axios.post(window.electron.url + 'dialog/open', {
+    //     'title': "Open Folder",
+    //     'windowReference': null,
+    //     'defaultPath': './',
+    //     'filters': [],
+    //     'buttonLabel': "Open Folder",
+    //     'properties': 'openDirectory',
+    // }, {
+    //     headers: {'X-NativePHP-Secret': window.electron.token}
+    // }).then(response => {
+    //     console.log(response.data)
+    //     path.value = response.data
+    // }).catch(error => {
+    //     console.log(error)
+    // })
+}
+
+const close = () => {
+    emit('close')
 }
 
 </script>

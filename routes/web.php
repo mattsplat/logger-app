@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/api/dashboard/get-path', [\App\Http\Controllers\DashboardController::class, 'getPath'])->name('dashboard.get-path');
+
 Route::get('/api/project', [\App\Http\Controllers\ProjectController::class, 'index'])->name('project.index');
 Route::post('/api/project', [\App\Http\Controllers\ProjectController::class, 'store'])->name('project.store');
 Route::delete('/api/project/{project}', [\App\Http\Controllers\ProjectController::class, 'destroy'])->name('project.destroy');

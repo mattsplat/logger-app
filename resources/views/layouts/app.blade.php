@@ -11,7 +11,7 @@
     @vite([ 'resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="h-full max-h-screen max-w-full">
         @include('layouts.partials.header')
 
         <main>

@@ -17,9 +17,9 @@ class ProjectController extends Controller
 
     public function show(Request $request, Project $project): \Illuminate\Http\RedirectResponse
     {
-        app('cache')->set('log-viewer.include_files', $project->filePaths);
+        cache()->put('log_viewer_file_paths', $project->filePaths);
 
-        return redirect()->route('log-viewer::logs.list');
+        return redirect('log-viewer');
     }
 
 

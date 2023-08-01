@@ -9,8 +9,13 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'path',
+    ];
+
     public function getFilePathsAttribute()
     {
-        return [$this->path.'*.log', $this->path.'**/*.log'];
+        return [$this->path.'/*.log', $this->path.'/**/*.log'];
     }
 }
