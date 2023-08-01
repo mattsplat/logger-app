@@ -57,11 +57,6 @@ import { ref, defineEmits } from 'vue'
 
 const name = ref('')
 const path = ref('')
-const getPath = (e) => {
-    path.value = e.target.files[0]
-   this
-
-}
 
 const emit = defineEmits(['addProject', 'close'])
 const addProject = () => {
@@ -71,6 +66,7 @@ const addProject = () => {
     }).then(response => {
         console.log(response.data)
         emit('addProject', response.data)
+        close()
     }).catch(error => {
         console.log(error)
     })
@@ -83,21 +79,6 @@ const openFileDialog = async () => {
     }).catch(error => {
         console.log(error)
     })
-    // axios.post(window.electron.url + 'dialog/open', {
-    //     'title': "Open Folder",
-    //     'windowReference': null,
-    //     'defaultPath': './',
-    //     'filters': [],
-    //     'buttonLabel': "Open Folder",
-    //     'properties': 'openDirectory',
-    // }, {
-    //     headers: {'X-NativePHP-Secret': window.electron.token}
-    // }).then(response => {
-    //     console.log(response.data)
-    //     path.value = response.data
-    // }).catch(error => {
-    //     console.log(error)
-    // })
 }
 
 const close = () => {

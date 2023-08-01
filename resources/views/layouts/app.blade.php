@@ -14,7 +14,7 @@
     <div id="app" class="h-full max-h-screen max-w-full">
         @include('layouts.partials.header')
 
-        <main>
+        <main class="">
             @yield('content')
         </main>
 
