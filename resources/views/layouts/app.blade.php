@@ -11,12 +11,12 @@
     @vite([ 'resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body>
-    <div id="app" class="h-full max-h-screen max-w-full">
+    <div id="app" class="h-full max-h-screen max-w-full min-h-screen flex flex-col">
         @include('layouts.partials.header')
 
-        <main class="">
+{{--        <main class="flex-grow">--}}
             @yield('content')
-        </main>
+{{--        </main>--}}
 
 
         @include('layouts.partials.footer')

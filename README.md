@@ -12,6 +12,7 @@ The frontend is built using Vue and TailwindCSS.
 4. Run `npm install`
 5. Run `npm run dev`
 6. Run `php artisan key:generate`
+6. Run `php artisan migrate`
 7. Run `php artisan native:serve`
 
 
